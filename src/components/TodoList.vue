@@ -1,7 +1,7 @@
 <template>
   <section>
       <ul>
-        <li v-for="(todoItem, idx) in todoItems" v-bind:key="idx">
+        <li v-for="(todoItem, idx) in propsdata" v-bind:key="idx">
             <i class="checkBtn fas fa-check" aria-hidden="true"></i>
             {{ todoItem }}
             <span class="removeBtn" type="button" @click="removeTodo(todoItem, idx)">
@@ -15,22 +15,10 @@
 
 <script>
 export default {
-    data() {
-        return {
-            todoItems: []
-        }
-    },
-    created(){
-        if(localStorage.length > 0){
-            for (let i = 0; i < localStorage.length; i ++){
-                this.todoItems.push(localStorage.key(i));
-            }
-        }
-    },
+    props: ['propsdata'],
     methods : {
         removeTodo(todoItem, index) {
-            localStorage.removeItem(todoItem);
-            this.todoItems.splice(index, 1); // splice(startIdx, count): 배열에서 인덱스 시작지점부터 count만큼 삭제
+            this.$emit('removeTodo', todoItem, index);
         }
     }
 }

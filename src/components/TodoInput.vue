@@ -14,13 +14,11 @@ export default {
             newTodoItem: ''
         }
     },
-    methods:{
-        addTodo(){
-            if(this.newTodoItem !== ""){
-                let value = this.newTodoItem && this.newTodoItem.trim();
-                localStorage.setItem(value, value); // setItem(key, value);
-                this.clearInput();
-            }
+    methods: {
+        addTodo() {
+            let value = this.newTodoItem && this.newTodoItem.trim();
+            this.$emit('addTodo', value);
+            this.clearInput();
         },
         clearInput(){
             this.newTodoItem = "";
