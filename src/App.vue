@@ -47,6 +47,7 @@ export default {
     }
   },
   updated() {
+    //localStorage에 있는 데이터로 todoList 다시 그리기
     if(this.isFixed === true) {
       if(localStorage.length > 0){
         this.todoItems = []; //todoItems 초기화
@@ -57,6 +58,7 @@ export default {
               this.todoItems.push(localStorage.key(i));
           }
         }
+        this.isFixed = false;
       }
     }
   },
@@ -74,13 +76,13 @@ export default {
       this.todoItems.splice(index, 1); // splice(startIdx, count): 배열에서 인덱스 시작지점부터 count만큼 삭제
     },
     fixContent(todoItem){
-      let chk = this.todoItems.length -1;
+      let lastIdx = this.todoItems.length -1;
       
       let tempArr = this.todoItems.splice(this.checked, (this.todoItems.length - this.checked), todoItem); //수정할 타겟부터 끝까지 잘라냄
       //this.todoItems.push(todoItem); //수정한 데이터 삽입
 
-      if(this.checked !== chk){ //체크한게 배열 마지막 값이 아니면
-        let tempArr2 = tempArr.splice(1, tempArr.length -1);
+      if(this.checked !== lastIdx){ //체크한게 배열 마지막 값이 아니면
+        let tempArr2 = tempArr.splice(1, tempArr.length -1); //최초값은 수정할 데이터이므로 제거
         tempArr = this.todoItems.concat(tempArr2);
         this.todoItems = tempArr;
         }
