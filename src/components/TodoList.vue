@@ -21,7 +21,7 @@
            <input type="text"
            ref="fixField"
            v-model="newTodoItem"
-           @keyup.enter="toFixItem"
+           @keyup.enter="changeItem"
            v-show="toFix && checked === idx && showCheck" placeholder="input new message">
             
             <div class="btnGroup">
@@ -29,7 +29,7 @@
                 <span class="fixBtn" type="button" >
                     <i class="fas fa-pencil-alt"
                     v-show="showCheck && checked === idx"
-                    @click="toFixItem"
+                    @click="changeItem"
                     aria-hidden="true"></i>
                 </span>
                 <!-- 삭제버튼 -->
@@ -64,7 +64,7 @@ export default {
         checkedItem(index) {
             this.$emit('changeCheck', index);
         },
-        toFixItem(){
+        changeItem(){
             /*
             this.$nextTick(function() {
                 this.$refs.fixField.focus();
@@ -74,7 +74,7 @@ export default {
             if(this.newTodoItem !== ""){
                 let value = this.newTodoItem && this.newTodoItem.trim();
                 this.$emit('fixContent', value);
-                //this.newTodoItem = '';
+                this.newTodoItem = '';
             }
             this.$emit('toFixItem');
         }
@@ -96,14 +96,16 @@ export default {
     .textField {
         margin-left: 5px;
     }
+    
     .list-enter-active, .list-leave-active {
         transition: all 1s;
     }
 
     .list-enter, .list-leave-to {
         opacity: 0;
-        transform: translateY(30px);
+        /*transform: translateY(30px);*/
     }
+    
     ul {
         list-style-type: none;
         padding-left: 0px;

@@ -21,3 +21,5 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+src/assets/memo.js
+src/assets/searchResult.json
